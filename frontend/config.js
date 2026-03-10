@@ -1,3 +1,4 @@
 ﻿(function () {
-  window.WECARE_API_ROOT = "http://localhost:5000/api";
+  window.WECARE_API_ROOT = "https://wecare-hub-backend.onrender.com/api";
 })();
+
