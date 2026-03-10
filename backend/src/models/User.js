@@ -10,6 +10,8 @@ const userSchema = new mongoose.Schema(
     phoneNumber: { type: String, trim: true },
     nationalId: { type: String, trim: true },
     passwordHash: { type: String, required: true, select: false },
+    resetPasswordToken: { type: String, select: false },
+    resetPasswordExpires: { type: Date, select: false },
     role: {
       type: String,
       enum: roles,
@@ -28,3 +30,5 @@ userSchema.statics.hashPassword = function hashPassword(plainPassword) {
 };
 
 export const User = mongoose.model("User", userSchema);
+
+

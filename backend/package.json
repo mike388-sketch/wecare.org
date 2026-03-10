@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "wecare-backend",
   "version": "1.0.0",
   "description": "WECARE backend API",
@@ -19,6 +19,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.6.3",
     "morgan": "^1.10.0",
+    "nodemailer": "^6.9.14",
     "passport": "^0.7.0",
     "passport-apple": "^2.0.2",
     "passport-github2": "^0.1.12",
@@ -29,3 +30,5 @@
     "nodemon": "^3.1.4"
   }
 }
+
+

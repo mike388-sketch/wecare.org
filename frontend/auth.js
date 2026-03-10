@@ -1,10 +1,12 @@
-import { getApiRoot, guardAuthPage, request, setNotice, setSession } from "./api.js";
+﻿import { getApiRoot, guardAuthPage, request, setNotice, setSession } from "./api.js";
 
 guardAuthPage();
 
 const noticeEl = document.getElementById("notice");
 const loginForm = document.getElementById("loginForm");
 const signupForm = document.getElementById("signupForm");
+const forgotPasswordForm = document.getElementById("forgotPasswordForm");
+const resetPasswordForm = document.getElementById("resetPasswordForm");
 
 function showError(message) {
   if (!noticeEl) {
@@ -83,6 +85,63 @@ async function handleSignup(event) {
   }
 }
 
+async function handleForgotPassword(event) {
+  event.preventDefault();
+
+  const formData = new FormData(forgotPasswordForm);
+  const payload = {
+    email: String(formData.get("email") || "").trim()
+  };
+
+  try {
+    await request("/auth/forgot-password", {
+      method: "POST",
+      body: payload,
+      auth: false
+    });
+    showSuccess("If that email exists, a reset link has been sent.");
+  } catch (error) {
+    showError(error.message);
+  }
+}
+
+function loadResetToken() {
+  if (!resetPasswordForm) {
+    return;
+  }
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get("token") || "";
+  const tokenField = document.getElementById("resetToken");
+  if (tokenField) {
+    tokenField.value = token;
+  }
+}
+
+async function handleResetPassword(event) {
+  event.preventDefault();
+
+  const formData = new FormData(resetPasswordForm);
+  const payload = {
+    token: String(formData.get("token") || "").trim(),
+    password: String(formData.get("password") || ""),
+    confirmPassword: String(formData.get("confirmPassword") || "")
+  };
+
+  try {
+    await request("/auth/reset-password", {
+      method: "POST",
+      body: payload,
+      auth: false
+    });
+    showSuccess("Password updated. Redirecting to login...");
+    window.setTimeout(() => {
+      window.location.replace("/login.html");
+    }, 900);
+  } catch (error) {
+    showError(error.message);
+  }
+}
+
 async function loadOauthProviders() {
   const target = document.getElementById("oauthProviders");
   if (!target) {
@@ -134,4 +193,13 @@ if (loginForm) {
 
 if (signupForm) {
   signupForm.addEventListener("submit", handleSignup);
+}
+
+if (forgotPasswordForm) {
+  forgotPasswordForm.addEventListener("submit", handleForgotPassword);
+}
+
+if (resetPasswordForm) {
+  loadResetToken();
+  resetPasswordForm.addEventListener("submit", handleResetPassword);
 }

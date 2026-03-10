@@ -1,10 +1,10 @@
 ﻿import { Router } from "express";
 import rateLimit from "express-rate-limit";
 import passport from "passport";
-import { login, me, oauthNotConfigured, oauthSuccess, register } from "../controllers/authController.js";
+import { forgotPassword, login, me, oauthNotConfigured, oauthSuccess, register, resetPassword } from "../controllers/authController.js";
 import { authenticate } from "../middleware/auth.js";
 import { validateBody } from "../middleware/validate.js";
-import { validateLogin, validateRegister } from "../validators/authValidators.js";
+import { validateForgotPassword, validateLogin, validateRegister, validateResetPassword } from "../validators/authValidators.js";
 import { env } from "../config/env.js";
 
 const router = Router();
@@ -20,6 +20,8 @@ router.use(authLimiter);
 
 router.post("/register", validateBody(validateRegister), register);
 router.post("/login", validateBody(validateLogin), login);
+router.post("/forgot-password", validateBody(validateForgotPassword), forgotPassword);
+router.post("/reset-password", validateBody(validateResetPassword), resetPassword);
 router.get("/me", authenticate, me);
 router.get("/oauth/providers", (_req, res) => {
   res.status(200).json({
@@ -79,3 +81,6 @@ if (env.appleClientId && env.appleTeamId && env.appleKeyId && env.applePrivateKe
 }
 
 export default router;
+
+
+

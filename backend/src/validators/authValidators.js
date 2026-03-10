@@ -43,3 +43,31 @@ export function validateLogin(body) {
 
   return errors;
 }
+
+export function validateForgotPassword(body) {
+  const errors = [];
+
+  if (!body.email || typeof body.email !== "string" || !isValidEmail(body.email)) {
+    errors.push("A valid email is required");
+  }
+
+  return errors;
+}
+
+export function validateResetPassword(body) {
+  const errors = [];
+
+  if (!body.token || typeof body.token !== "string") {
+    errors.push("reset token is required");
+  }
+
+  if (!body.password || typeof body.password !== "string" || body.password.length < 8) {
+    errors.push("password must be at least 8 characters");
+  }
+
+  if (!body.confirmPassword || body.confirmPassword !== body.password) {
+    errors.push("confirmPassword must match password");
+  }
+
+  return errors;
+}

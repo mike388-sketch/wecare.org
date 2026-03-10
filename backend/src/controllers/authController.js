@@ -1,9 +1,11 @@
-﻿import { User } from "../models/User.js";
+﻿import crypto from "crypto";
+import { User } from "../models/User.js";
 import { AppError } from "../utils/appError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { signAuthToken } from "../utils/token.js";
 import { isPublicSignupRole, normalizeRole } from "../utils/roles.js";
 import { env } from "../config/env.js";
+import { sendPasswordResetEmail } from "../utils/email.js";
 
 function toPublicUser(userDoc) {
   return {
@@ -78,6 +80,61 @@ export const login = asyncHandler(async (req, res) => {
     token,
     user: toPublicUser(user)
   });
+});
+
+export const forgotPassword = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  const normalizedEmail = email.toLowerCase();
+  const user = await User.findOne({ email: normalizedEmail }).select("_id fullName email");
+
+  if (!user) {
+    return res.status(200).json({ message: "If that email exists, a reset link has been sent." });
+  }
+
+  const rawToken = crypto.randomBytes(32).toString("hex");
+  const tokenHash = crypto.createHash("sha256").update(rawToken).digest("hex");
+
+  user.resetPasswordToken = tokenHash;
+  user.resetPasswordExpires = new Date(Date.now() + env.resetTokenMinutes * 60 * 1000);
+  await user.save({ validateBeforeSave: false });
+
+  const resetUrl = buildFrontendUrl("/reset-password.html", { token: rawToken });
+
+  try {
+    await sendPasswordResetEmail({
+      to: user.email,
+      name: user.fullName,
+      resetUrl
+    });
+  } catch (_error) {
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    await user.save({ validateBeforeSave: false });
+    throw new AppError("Password reset email service is not configured.", 500);
+  }
+
+  return res.status(200).json({ message: "If that email exists, a reset link has been sent." });
+});
+
+export const resetPassword = asyncHandler(async (req, res) => {
+  const { token, password } = req.body;
+  const tokenHash = crypto.createHash("sha256").update(token).digest("hex");
+
+  const user = await User.findOne({
+    resetPasswordToken: tokenHash,
+    resetPasswordExpires: { $gt: new Date() }
+  }).select("+passwordHash");
+
+  if (!user) {
+    throw new AppError("Invalid or expired reset token", 400);
+  }
+
+  user.passwordHash = await User.hashPassword(password);
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpires = undefined;
+  await user.save();
+
+  return res.status(200).json({ message: "Password updated. You can log in now." });
 });
 
 export const me = asyncHandler(async (req, res) => {

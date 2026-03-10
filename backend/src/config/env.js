@@ -28,5 +28,12 @@ export const env = {
   appleClientId: process.env.APPLE_CLIENT_ID || "",
   appleTeamId: process.env.APPLE_TEAM_ID || "",
   appleKeyId: process.env.APPLE_KEY_ID || "",
-  applePrivateKey: process.env.APPLE_PRIVATE_KEY || ""
+  applePrivateKey: process.env.APPLE_PRIVATE_KEY || "",
+  smtpHost: process.env.SMTP_HOST || "",
+  smtpPort: Number(process.env.SMTP_PORT) || 587,
+  smtpSecure: process.env.SMTP_SECURE === "true",
+  smtpUser: process.env.SMTP_USER || "",
+  smtpPass: process.env.SMTP_PASS || "",
+  smtpFrom: process.env.SMTP_FROM || "",
+  resetTokenMinutes: Number(process.env.RESET_TOKEN_MINUTES) || 30
 };
