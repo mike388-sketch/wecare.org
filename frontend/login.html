@@ -1,0 +1,68 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | WECARE Hub</title>
+    <link rel="icon" href="/assets/favicon-heart.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+      <script src="/config.js"></script>
+  </head>
+  <body>
+    <main class="auth-shell">
+      <section class="auth-layout">
+        <article class="auth-info">
+          <p class="kicker">Authentication Module</p>
+          <h1>Secure WECARE Access</h1>
+          <p class="lead">Log in to access student health records, incident tracking, emergency alerts, and communication tools.</p>
+          <div class="point">
+            <div class="point-title">Roles supported</div>
+            <div class="point-text">Healthcare Provider, Parent, Student</div>
+          </div>
+          <div class="point">
+            <div class="point-title">Need an account?</div>
+            <div class="point-text">Public signup is enabled for healthcare providers only.</div>
+          </div>
+          <div class="action-row">
+            <a class="btn btn-secondary" href="/index.html">Back to Home</a>
+            <a class="btn btn-primary" href="/signup.html">Provider Signup</a>
+          </div>
+        </article>
+
+        <article class="auth-card">
+          <h2>Sign In</h2>
+          <p class="helper">Use your registered WECARE credentials.</p>
+
+          <div id="notice" class="notice"></div>
+
+          <form id="loginForm">
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+            </div>
+
+            <div class="field">
+              <label for="password">Password</label>
+              <input id="password" name="password" type="password" autocomplete="current-password" required />
+            </div>
+
+            <button class="btn btn-primary" type="submit">Login to Dashboard</button>
+          </form>
+
+          <hr style="border: none; border-top: 1px solid var(--line); margin: 15px 0;" />
+
+          <div>
+            <strong>OAuth Providers</strong>
+            <p class="helper">Only configured providers will be shown.</p>
+            <div id="oauthProviders" class="oauth-row"></div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script type="module" src="/auth.js"></script>
+  </body>
+</html>
+
+
+

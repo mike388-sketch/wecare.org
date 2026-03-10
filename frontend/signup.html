@@ -1,0 +1,74 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Provider Signup | WECARE Hub</title>
+    </title>
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+      <script src="/config.js"></script>
+  </head>
+  <body>
+    <main class="auth-shell">
+      <section class="auth-layout">
+        <article class="auth-info">
+          <p class="kicker">Provider Registration</p>
+          <h1>Create Healthcare Provider Account</h1>
+          <p class="lead">This account can register students, create health incidents, and monitor school-wide health trends.</p>
+          <div class="point">
+            <div class="point-title">Important</div>
+            <div class="point-text">Parent and student accounts are created inside the dashboard during student registration.</div>
+          </div>
+          <div class="action-row">
+            <a class="btn btn-secondary" href="/index.html">Back to Home</a>
+            <a class="btn btn-primary" href="/login.html">Already Have an Account</a>
+          </div>
+        </article>
+
+        <article class="auth-card">
+          <h2>Provider Signup</h2>
+          <p class="helper">Role is fixed to Healthcare Provider.</p>
+
+          <div id="notice" class="notice"></div>
+
+          <form id="signupForm">
+            <div class="field">
+              <label for="fullName">Full Name</label>
+              <input id="fullName" name="fullName" required />
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required />
+            </div>
+
+            <div class="field">
+              <label for="phoneNumber">Phone Number</label>
+              <input id="phoneNumber" name="phoneNumber" required />
+            </div>
+
+            <div class="field">
+              <label for="password">Password</label>
+              <input id="password" name="password" type="password" minlength="8" required />
+            </div>
+
+            <div class="field">
+              <label for="confirmPassword">Confirm Password</label>
+              <input id="confirmPassword" name="confirmPassword" type="password" minlength="8" required />
+            </div>
+
+            <button class="btn btn-primary" type="submit">Create Account</button>
+          </form>
+        </article>
+      </section>
+    </main>
+
+    <script type="module" src="/auth.js"></script>
+  </body>
+</html>
+
+
+
+
+

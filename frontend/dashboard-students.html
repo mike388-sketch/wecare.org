@@ -1,0 +1,130 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WECARE Hub | Student Registry</title>
+    </title>
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+      <script src="/config.js"></script>
+  </head>
+  <body class="dashboard">
+    <div class="dash-layout">
+      <aside class="dash-sidebar">
+        <div class="sidebar-head">
+          <a class="brand" href="/index.html">
+            <span>WECARE Hub</span>
+          </a>
+          <p class="sidebar-role" id="roleHeading">Dashboard</p>
+        </div>
+
+        <nav class="sidebar-nav">
+  <a class="nav-link" data-roles="health_provider,parent,student" href="/dashboard.html">Overview</a>
+  <a class="nav-link" data-roles="health_provider" href="/dashboard-health.html">System Health</a>
+  <a class="nav-link" data-roles="health_provider,parent,student" data-label-provider="Student Registry" data-label-parent="My Student" data-label-student="My Profile" href="/dashboard-students.html">Student Registry</a>
+  <a class="nav-link" data-roles="health_provider,parent,student" data-label-provider="Records" data-label-parent="Health Records" data-label-student="My Records" href="/dashboard-records.html">Records</a>
+  <a class="nav-link" data-roles="health_provider,parent,student" data-label-provider="Alerts" data-label-parent="Messages" data-label-student="Alerts" href="/dashboard-alerts.html">Alerts</a>
+  <a class="nav-link" data-roles="health_provider,parent,student" data-label-provider="Trends" data-label-parent="Insights" data-label-student="Trends" href="/dashboard-trends.html">Trends</a>
+  <a class="nav-link provider-only" data-roles="health_provider" href="/dashboard-actions.html">Provider Actions</a>
+</nav>
+
+        <div class="sidebar-footer">
+          <p>Use the sidebar to jump between live insights, records, and actions.</p>
+        </div>
+      </aside>
+
+      <main class="dash-main">
+        <header class="dash-header">
+          <div>
+            <p class="dash-eyebrow">WECARE Command Center</p>
+            <h1 class="dash-title">Student Registry</h1>
+            <p class="dash-sub" id="scopeStatus">Loading access scope...</p>
+          </div>
+          <div class="dash-actions">
+            <span class="user-chip" id="userChip">Loading...</span>
+            <button class="btn btn-secondary" id="refreshBtn" type="button">Refresh</button>
+            <button class="btn btn-primary" id="logoutBtn" type="button">Log Out</button>
+          </div>
+        </header>
+
+        <div id="globalNotice" class="notice"></div>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Student Registry</h2>
+            <p>Master list of registered students and current risk assessment.</p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Admission</th>
+                  <th>Student</th>
+                  <th>Stream</th>
+                  <th>Medical Issues</th>
+                  <th>Risk</th>
+                  <th class="provider-only">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="studentRows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <article id="editStudentCard" class="panel provider-only hide">
+          <div class="panel-head">
+            <h2>Edit Student Details</h2>
+            <p class="helper" id="editStudentLabel">Select Edit on a student to update details.</p>
+          </div>
+          <form id="editStudentForm">
+            <input id="editStudentId" type="hidden" />
+            <div class="two-col">
+              <div class="field">
+                <label for="editStudentFullName">Full Name</label>
+                <input id="editStudentFullName" name="editStudentFullName" required />
+              </div>
+              <div class="field">
+                <label for="editAdmissionNumber">Admission Number</label>
+                <input id="editAdmissionNumber" name="editAdmissionNumber" required />
+              </div>
+              <div class="field">
+                <label for="editStudentIdNumber">Student ID Number</label>
+                <input id="editStudentIdNumber" name="editStudentIdNumber" required />
+              </div>
+              <div class="field">
+                <label for="editStream">Stream</label>
+                <input id="editStream" name="editStream" required />
+              </div>
+              <div class="field">
+                <label for="editUpiNumber">UPI Number</label>
+                <input id="editUpiNumber" name="editUpiNumber" required />
+              </div>
+              <div class="field">
+                <label for="editDateOfBirth">Date of Birth</label>
+                <input id="editDateOfBirth" name="editDateOfBirth" type="date" required />
+              </div>
+            </div>
+            <div class="field">
+              <label for="editMedicalIssues">Medical Issues</label>
+              <textarea id="editMedicalIssues" name="editMedicalIssues" required></textarea>
+            </div>
+            <div class="step-actions">
+              <button class="btn btn-secondary" id="cancelEditStudent" type="button">Cancel</button>
+              <button class="btn btn-primary" type="submit">Save Changes</button>
+            </div>
+          </form>
+        </article>
+      </main>
+    </div>
+
+    <script type="module" src="/dashboard.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
+

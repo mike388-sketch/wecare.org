@@ -1,0 +1,89 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WECARE Hub | Overview</title>
+    </title>
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+      <script src="/config.js"></script>
+  </head>
+  <body class="dashboard">
+    <div class="dash-layout">
+      <aside class="dash-sidebar">
+        <div class="sidebar-head">
+          <a class="brand" href="/index.html">
+            <span>WECARE Hub</span>
+          </a>
+          <p class="sidebar-role" id="roleHeading">Dashboard</p>
+        </div>
+
+        <nav class="sidebar-nav">
+  <a class="nav-link" data-roles="health_provider,parent,student" href="/dashboard.html">Overview</a>
+  <a class="nav-link" data-roles="health_provider" href="/dashboard-health.html">System Health</a>
+  <a class="nav-link" data-roles="health_provider,parent,student" data-label-provider="Student Registry" data-label-parent="My Student" data-label-student="My Profile" href="/dashboard-students.html">Student Registry</a>
+  <a class="nav-link" data-roles="health_provider,parent,student" data-label-provider="Records" data-label-parent="Health Records" data-label-student="My Records" href="/dashboard-records.html">Records</a>
+  <a class="nav-link" data-roles="health_provider,parent,student" data-label-provider="Alerts" data-label-parent="Messages" data-label-student="Alerts" href="/dashboard-alerts.html">Alerts</a>
+  <a class="nav-link" data-roles="health_provider,parent,student" data-label-provider="Trends" data-label-parent="Insights" data-label-student="Trends" href="/dashboard-trends.html">Trends</a>
+  <a class="nav-link provider-only" data-roles="health_provider" href="/dashboard-actions.html">Provider Actions</a>
+</nav>
+
+        <div class="sidebar-footer">
+          <p>Use the sidebar to jump between live insights, records, and actions.</p>
+        </div>
+      </aside>
+
+      <main class="dash-main">
+        <header class="dash-header">
+          <div>
+            <p class="dash-eyebrow">WECARE Command Center</p>
+            <h1 class="dash-title">Overview Dashboard</h1>
+            <p class="dash-sub" id="scopeStatus">Loading access scope...</p>
+          </div>
+          <div class="dash-actions">
+            <span class="user-chip" id="userChip">Loading...</span>
+            <button class="btn btn-secondary" id="refreshBtn" type="button">Refresh</button>
+            <button class="btn btn-primary" id="logoutBtn" type="button">Log Out</button>
+          </div>
+        </header>
+
+        <div id="globalNotice" class="notice"></div>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Overview</h2>
+            <p>Live snapshot of students, risk signals, incidents, and alerts.</p>
+          </div>
+          <div class="stats-grid">
+            <article class="stat-card">
+              <div class="stat-title">Students</div>
+              <div class="stat-value" id="statStudents">0</div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-title">Risk Flags</div>
+              <div class="stat-value" id="statRisk">0</div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-title">Incidents (30d)</div>
+              <div class="stat-value" id="statRecords">0</div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-title">Unread Alerts</div>
+              <div class="stat-value" id="statAlerts">0</div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="/dashboard.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
+

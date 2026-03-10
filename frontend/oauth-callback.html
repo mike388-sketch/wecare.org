@@ -1,0 +1,30 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OAuth Callback | WECARE Hub</title>
+    </title>
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+      <script src="/config.js"></script>
+  </head>
+  <body>
+    <main class="auth-shell">
+      <section class="auth-layout" style="grid-template-columns: 1fr; max-width: 640px;">
+        <article class="auth-card">
+          <h2>Completing sign in</h2>
+          <p class="helper">Please wait while we validate your WECARE session.</p>
+          <div id="notice" class="notice show">Processing...</div>
+        </article>
+      </section>
+    </main>
+
+    <script type="module" src="/oauth-callback.js"></script>
+  </body>
+</html>
+
+
+
+
+

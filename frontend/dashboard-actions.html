@@ -1,0 +1,206 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WECARE Hub | Provider Actions</title>
+    </title>
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+      <script src="/config.js"></script>
+  </head>
+  <body class="dashboard">
+    <div class="dash-layout">
+      <aside class="dash-sidebar">
+        <div class="sidebar-head">
+          <a class="brand" href="/index.html">
+            <span>WECARE Hub</span>
+          </a>
+          <p class="sidebar-role" id="roleHeading">Dashboard</p>
+        </div>
+
+        <nav class="sidebar-nav">
+  <a class="nav-link" data-roles="health_provider,parent,student" href="/dashboard.html">Overview</a>
+  <a class="nav-link" data-roles="health_provider" href="/dashboard-health.html">System Health</a>
+  <a class="nav-link" data-roles="health_provider,parent,student" data-label-provider="Student Registry" data-label-parent="My Student" data-label-student="My Profile" href="/dashboard-students.html">Student Registry</a>
+  <a class="nav-link" data-roles="health_provider,parent,student" data-label-provider="Records" data-label-parent="Health Records" data-label-student="My Records" href="/dashboard-records.html">Records</a>
+  <a class="nav-link" data-roles="health_provider,parent,student" data-label-provider="Alerts" data-label-parent="Messages" data-label-student="Alerts" href="/dashboard-alerts.html">Alerts</a>
+  <a class="nav-link" data-roles="health_provider,parent,student" data-label-provider="Trends" data-label-parent="Insights" data-label-student="Trends" href="/dashboard-trends.html">Trends</a>
+  <a class="nav-link provider-only" data-roles="health_provider" href="/dashboard-actions.html">Provider Actions</a>
+</nav>
+
+        <div class="sidebar-footer">
+          <p>Use the sidebar to jump between live insights, records, and actions.</p>
+        </div>
+      </aside>
+
+      <main class="dash-main">
+        <header class="dash-header">
+          <div>
+            <p class="dash-eyebrow">WECARE Command Center</p>
+            <h1 class="dash-title">Provider Actions</h1>
+            <p class="dash-sub" id="scopeStatus">Loading access scope...</p>
+          </div>
+          <div class="dash-actions">
+            <span class="user-chip" id="userChip">Loading...</span>
+            <button class="btn btn-secondary" id="refreshBtn" type="button">Refresh</button>
+            <button class="btn btn-primary" id="logoutBtn" type="button">Log Out</button>
+          </div>
+        </header>
+
+        <div id="globalNotice" class="notice"></div>
+
+        <section id="providerSection" class="panel provider-only">
+          <div class="panel-head">
+            <h2>Provider Actions</h2>
+            <p>Register students, log incidents, and update student profiles.</p>
+          </div>
+
+          <div class="two-col">
+            <article class="panel-sub">
+              <h3>Student Registration</h3>
+              <p class="helper">Complete all three steps to create linked student and parent accounts.</p>
+              <div class="stepper">
+                <span class="step active" data-step-indicator="1">Student</span>
+                <span class="step" data-step-indicator="2">Parent</span>
+                <span class="step" data-step-indicator="3">Medical</span>
+              </div>
+
+              <form id="studentForm">
+                <section class="form-step" data-step="1">
+                  <div class="field">
+                    <label for="studentFullName">Full Names</label>
+                    <input id="studentFullName" name="studentFullName" required />
+                  </div>
+                  <div class="field">
+                    <label for="admissionNumber">Admission Number</label>
+                    <input id="admissionNumber" name="admissionNumber" required />
+                  </div>
+                  <div class="field">
+                    <label for="studentEmail">Email</label>
+                    <input id="studentEmail" name="studentEmail" type="email" required />
+                  </div>
+                  <div class="field">
+                    <label for="studentPhone">Phone Number</label>
+                    <input id="studentPhone" name="studentPhone" required />
+                  </div>
+                  <div class="field">
+                    <label for="studentPassword">Password</label>
+                    <input id="studentPassword" name="studentPassword" type="password" minlength="8" required />
+                  </div>
+                  <div class="field">
+                    <label for="studentPasswordConfirm">Confirm Password</label>
+                    <input id="studentPasswordConfirm" name="studentPasswordConfirm" type="password" minlength="8" required />
+                  </div>
+                  <div class="field">
+                    <label for="upiNumber">UPI Number</label>
+                    <input id="upiNumber" name="upiNumber" required />
+                  </div>
+                  <div class="field">
+                    <label for="dateOfBirth">Date of Birth</label>
+                    <input id="dateOfBirth" name="dateOfBirth" type="date" required />
+                  </div>
+                  <div class="field">
+                    <label for="studentIdNumber">Student ID Number</label>
+                    <input id="studentIdNumber" name="studentIdNumber" required />
+                  </div>
+                  <div class="field">
+                    <label for="stream">Stream</label>
+                    <input id="stream" name="stream" required />
+                  </div>
+                  <div class="step-actions">
+                    <button class="btn btn-primary" type="button" data-step-next>Next</button>
+                  </div>
+                </section>
+
+                <section class="form-step" data-step="2" hidden>
+                  <div class="field">
+                    <label for="parentName">Parent Full Names</label>
+                    <input id="parentName" name="parentName" required />
+                  </div>
+                  <div class="field">
+                    <label for="parentEmail">Parent Email</label>
+                    <input id="parentEmail" name="parentEmail" type="email" required />
+                  </div>
+                  <div class="field">
+                    <label for="parentNationalId">National ID</label>
+                    <input id="parentNationalId" name="parentNationalId" required />
+                  </div>
+                  <div class="field">
+                    <label for="parentPassword">Parent Password</label>
+                    <input id="parentPassword" name="parentPassword" type="password" minlength="8" required />
+                  </div>
+                  <div class="field">
+                    <label for="parentPasswordConfirm">Confirm Password</label>
+                    <input id="parentPasswordConfirm" name="parentPasswordConfirm" type="password" minlength="8" required />
+                  </div>
+                  <div class="field">
+                    <label for="parentPhone">Parent Phone Number</label>
+                    <input id="parentPhone" name="parentPhone" required />
+                  </div>
+                  <div class="step-actions">
+                    <button class="btn btn-secondary" type="button" data-step-back>Back</button>
+                    <button class="btn btn-primary" type="button" data-step-next>Next</button>
+                  </div>
+                </section>
+
+                <section class="form-step" data-step="3" hidden>
+                  <div class="field">
+                    <label for="medicalIssues">Student Medical Issues</label>
+                    <textarea id="medicalIssues" name="medicalIssues" required></textarea>
+                    <p class="helper">List allergies or chronic conditions, separated by commas. Enter "None" if no issues.</p>
+                  </div>
+                  <div class="step-actions">
+                    <button class="btn btn-secondary" type="button" data-step-back>Back</button>
+                    <button class="btn btn-primary" type="submit">Complete Registration</button>
+                  </div>
+                </section>
+              </form>
+            </article>
+
+            <article class="panel-sub">
+              <h3>Log Health Incident</h3>
+              <p class="helper">Record clinic visits or incidents as they happen.</p>
+              <form id="recordForm">
+                <div class="field">
+                  <label for="recordStudent">Student</label>
+                  <select id="recordStudent" name="recordStudent" required></select>
+                </div>
+                <div class="field">
+                  <label for="symptoms">Symptoms</label>
+                  <textarea id="symptoms" name="symptoms" placeholder="e.g. Fever, headache"></textarea>
+                </div>
+                <div class="field">
+                  <label for="diagnosis">Diagnosis</label>
+                  <input id="diagnosis" name="diagnosis" />
+                </div>
+                <div class="field">
+                  <label for="actionTaken">Action Taken</label>
+                  <textarea id="actionTaken" name="actionTaken"></textarea>
+                </div>
+                <div class="field">
+                  <label for="notes">Notes</label>
+                  <textarea id="notes" name="notes"></textarea>
+                </div>
+                <div class="field">
+                  <label for="followUpDate">Follow-up Date</label>
+                  <input id="followUpDate" name="followUpDate" type="date" />
+                </div>
+                <button class="btn btn-primary" type="submit">Submit Incident</button>
+              </form>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="/dashboard.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
