@@ -328,6 +328,7 @@ function renderHeader() {
   if (!user) {
     userChip.textContent = "Unknown user";
     scopeStatus.textContent = "Access scope unavailable.";
+    scopeStatus.classList.add("hide");
     applyRoleTheme(null);
     if (providerSection) {
       providerSection.classList.add("hide");
@@ -335,8 +336,12 @@ function renderHeader() {
     toggleProviderOnlyElements();
     return;
   }
-  userChip.textContent = `${escapeHtml(user.fullName)} (${roleLabel(user.role)})`;
-  scopeStatus.textContent = roleScopeDescription(user.role);
+  userChip.textContent = escapeHtml(user.fullName);
+  scopeStatus.textContent = "";
+  scopeStatus.classList.add("hide");
+  if (roleHeading) {
+    roleHeading.textContent = user.fullName;
+  }
   applyRoleTheme(user.role);
   applyRoleLinks(user.role);
   if (providerSection) {
